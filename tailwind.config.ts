@@ -50,10 +50,13 @@ export default {
       },
       backgroundImage: {
         'hero-gradient': 'var(--hero-gradient)',
+        'gradient-mesh': 'radial-gradient(at 40% 20%, hsla(228, 89%, 16%, 0.1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(46, 100%, 50%, 0.1) 0px, transparent 50%)',
       },
       boxShadow: {
         'card-hover': 'var(--card-hover)',
         'glow-accent': 'var(--glow-accent)',
+        'glow-accent-lg': '0 0 40px hsla(46, 100%, 50%, 0.7)',
+        '3d': '0 20px 60px -10px hsla(228, 89%, 16%, 0.3)',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -77,10 +80,26 @@ export default {
             height: "0",
           },
         },
+        "count-up": {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        "slide-up": {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        "border-glow": {
+          '0%, 100%': { borderColor: 'hsl(228, 89%, 16%)' },
+          '50%': { borderColor: 'hsl(46, 100%, 50%)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "count-up": "count-up 1s ease-out forwards",
+        "slide-up": "slide-up 0.5s ease-out forwards",
+        "border-glow": "border-glow 2s ease-in-out infinite",
       },
     },
   },
