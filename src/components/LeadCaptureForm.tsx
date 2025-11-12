@@ -136,7 +136,7 @@ const LeadCaptureForm = ({ calculationData }: LeadCaptureFormProps) => {
             type="submit" 
             variant="glow"
             size="lg"
-            className="w-full h-14 text-lg font-bold"
+            className="w-full h-auto min-h-12 py-3 text-base sm:text-lg font-bold flex-wrap whitespace-normal break-words text-center leading-snug"
             disabled={isLoading}
           >
             {isLoading ? (

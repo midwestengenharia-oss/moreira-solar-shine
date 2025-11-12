@@ -185,7 +185,7 @@ const Calculator = () => {
 
 
   return (
-    <section id="calculadora" className="relative pt-8 pb-12 md:pt-12 md:pb-16">
+    <section id="calculadora" className="relative pt-36 sm:pt-32 md:pt-24 pb-12 md:pb-16">
       <UrgencyBanner />
       <div className="mx-auto w-full px-4 md:px-6">
         <Card className="mx-auto w-full max-w-[1100px] border-border">
