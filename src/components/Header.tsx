@@ -1,11 +1,44 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 import logo from "@/assets/logo-white.png";
 
 const Header = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 50) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+
+      if (id === "calculadora") {
+        setTimeout(() => {
+          const billInput = document.getElementById("bill") as HTMLInputElement;
+          const consumptionInput = document.getElementById("consumption") as HTMLInputElement;
+          const activeInput = billInput?.offsetParent ? billInput : consumptionInput;
+          activeInput?.focus();
+        }, 800);
+      }
     }
   };
 
@@ -14,7 +47,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-[60] w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className={`fixed top-0 z-[60] w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container flex h-20 items-center justify-between">
         <div className="flex items-center gap-8">
           <img src={logo} alt="Moreira Solar" className="h-12 w-auto" />
@@ -46,7 +79,8 @@ const Header = () => {
           </nav>
         </div>
         <Button onClick={handleWhatsApp} className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
-          Falar no WhatsApp
+          <MessageCircle className="mr-2 h-4 w-4" />
+          Falar com Especialista
         </Button>
       </div>
     </header>

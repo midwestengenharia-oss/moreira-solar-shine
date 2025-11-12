@@ -1,22 +1,31 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
 import Calculator from "@/components/Calculator";
-import HowItWorks from "@/components/HowItWorks";
-import BusinessModels from "@/components/BusinessModels";
-import ContactForm from "@/components/ContactForm";
+import SocialProof from "@/components/SocialProof";
+import HowItWorksAndModels from "@/components/HowItWorksAndModels";
+import FAQContact from "@/components/FAQContact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <main>
+      {/* Padding-top para compensar Header (80px) + Banner (~56px) = ~136px */}
+      <main className="pt-[136px]">
+        {/* 1. HERO - Calculadora como ponto de entrada principal */}
         <Calculator />
+
+        {/* 2. BENEFÍCIOS - Por que energia solar? */}
         <Benefits />
-        <HowItWorks />
-        <BusinessModels />
-        <ContactForm />
+
+        {/* 3. PROVA SOCIAL - Números + Depoimentos (seção unificada) */}
+        <SocialProof />
+
+        {/* 4. PROCESSO + MODELOS - Como funciona e opções disponíveis */}
+        <HowItWorksAndModels />
+
+        {/* 5. FAQ + CONTATO - Última oportunidade de conversão */}
+        <FAQContact />
       </main>
       <Footer />
     </div>

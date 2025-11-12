@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dark theme moderno mantendo identidade Moreira */
+    /* Dark theme moderno mantendo identidade Moreira - OTIMIZADO PARA LEGIBILIDADE */
     --background: 228 40% 10%;
     --foreground: 210 20% 98%;
 
@@ -25,7 +25,7 @@ All colors MUST be HSL.
     --secondary-foreground: 210 20% 98%;
 
     --muted: 228 20% 20%;
-    --muted-foreground: 210 15% 70%;
+    --muted-foreground: 210 20% 85%; /* Aumentado de 70% para 85% - muito mais legível */
 
     --accent: 46 100% 50%;
     --accent-foreground: 228 89% 16%;
@@ -61,7 +61,7 @@ All colors MUST be HSL.
     --secondary-foreground: 0 0% 98%;
 
     --muted: 228 40% 25%;
-    --muted-foreground: 215 20% 65%;
+    --muted-foreground: 215 20% 82%; /* Aumentado de 65% para 82% - muito mais legível */
 
     --accent: 46 100% 50%;
     --accent-foreground: 228 89% 16%;
@@ -82,5 +82,38 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  @keyframes banner-pulse {
+    0%, 100% {
+      opacity: 0.95;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 1;
+      filter: brightness(1.15);
+    }
+  }
+
+  .animate-banner-pulse {
+    animation: banner-pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes zap-bounce {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-3px) rotate(-5deg);
+    }
+    75% {
+      transform: translateY(-3px) rotate(5deg);
+    }
+  }
+
+  .animate-zap-bounce {
+    animation: zap-bounce 1.5s ease-in-out infinite;
   }
 }
