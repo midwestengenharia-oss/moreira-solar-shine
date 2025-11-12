@@ -8,23 +8,24 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 215 20% 35%;
+    /* Dark theme moderno mantendo identidade Moreira */
+    --background: 228 40% 10%;
+    --foreground: 210 20% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 20% 35%;
+    --card: 228 30% 14%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 20% 35%;
+    --popover: 228 30% 14%;
+    --popover-foreground: 210 20% 98%;
 
     --primary: 228 89% 16%;
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: 46 100% 50%;
 
-    --secondary: 214 15% 91%;
-    --secondary-foreground: 228 89% 16%;
+    --secondary: 228 20% 20%;
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 214 15% 95%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 228 20% 20%;
+    --muted-foreground: 210 15% 70%;
 
     --accent: 46 100% 50%;
     --accent-foreground: 228 89% 16%;
@@ -32,9 +33,9 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 228 89% 16%;
+    --border: 228 30% 25%;
+    --input: 228 30% 25%;
+    --ring: 46 100% 50%;
 
     --radius: 0.75rem;
 

@@ -36,14 +36,14 @@ const UrgencyBanner = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 text-white py-3 px-4 shadow-lg animate-pulse-slow">
+    <div className="sticky top-20 z-40 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 text-white py-3 px-4 shadow-lg animate-pulse-slow">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Flame className="h-5 w-5 animate-bounce" />
             <span className="font-bold text-sm md:text-base">BLACK FRIDAY SOLAR</span>
             <Badge variant="glow" className="hidden md:inline-flex">
-              Últimas vagas
+              🔥 Última chance
             </Badge>
           </div>
           

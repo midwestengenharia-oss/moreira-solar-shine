@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Calculator as CalcIcon, Zap, TrendingUp } from "lucide-react";
+import { Calculator as CalcIcon, Zap, TrendingUp, Battery, Grid3x3, Cpu } from "lucide-react";
 import UrgencyBanner from "./UrgencyBanner";
 import BeforeAfterComparison from "./BeforeAfterComparison";
 import CircularProgress from "./CircularProgress";
@@ -58,6 +58,7 @@ const Calculator = () => {
   const [consumptionValue, setConsumptionValue] = useState("");
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [selectedPlan, setSelectedPlan] = useState<FinancingOption | null>(null);
+  const [viewingPlan, setViewingPlan] = useState<FinancingOption | null>(null);
 
   const calculate = () => {
     let consumption = 0;
@@ -100,7 +101,15 @@ const Calculator = () => {
       options,
     });
     setSelectedPlan(null);
+    setViewingPlan(null);
   };
+
+  useEffect(() => {
+    if (selectedPlan) {
+      const formElement = document.getElementById('lead-capture-form');
+      formElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [selectedPlan]);
 
   return (
     <section id="calculadora" className="relative min-h-screen bg-gradient-mesh">
@@ -197,48 +206,49 @@ const Calculator = () => {
             animate="visible"
             className="max-w-6xl mx-auto space-y-8"
           >
-            {/* Before/After Comparison */}
+            {/* Before/After Comparison - Dinâmico com hover */}
             <motion.div variants={itemVariants}>
-              <BeforeAfterComparison
-                currentBill={result.currentBill}
-                newPayment={result.options[2].monthlyPayment}
-                monthlySavings={result.options[2].monthlySavings}
-                savingsPercentage={Math.round((result.options[2].monthlySavings / result.currentBill) * 100)}
-              />
+              {(() => {
+                const displayPlan = selectedPlan || viewingPlan || result.options[2];
+                return (
+                  <BeforeAfterComparison
+                    currentBill={result.currentBill}
+                    newPayment={displayPlan.monthlyPayment}
+                    monthlySavings={displayPlan.monthlySavings}
+                    savingsPercentage={Math.round((displayPlan.monthlySavings / result.currentBill) * 100)}
+                  />
+                );
+              })()}
             </motion.div>
 
-            {/* Technical Specs */}
+            {/* Technical Specs - Com ícones modernos */}
             <motion.div variants={itemVariants}>
-              <Card className="border-2 border-primary bg-primary text-primary-foreground shadow-3d">
-                <CardContent className="pt-6">
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
-                    <div>
-                      <p className="text-sm opacity-80 mb-1">Sistema</p>
-                      <p className="text-3xl font-bold">{result.systemKwp.toFixed(2)} kWp</p>
-                    </div>
-                    <div>
-                      <p className="text-sm opacity-80 mb-1">Módulos</p>
-                      <p className="text-3xl font-bold">{result.modulesQty}x {MODULO_W}W</p>
-                    </div>
-                    <div>
-                      <p className="text-sm opacity-80 mb-1">Inversor</p>
-                      <p className="text-3xl font-bold">{result.inverterKw} kW</p>
-                    </div>
-                    <div>
-                      <p className="text-sm opacity-80 mb-1">Geração Mensal</p>
-                      <p className="text-3xl font-bold">{result.generation.toFixed(0)} kWh</p>
-                    </div>
-                    <div>
-                      <p className="text-sm opacity-80 mb-1">Conta Atual</p>
-                      <p className="text-3xl font-bold">R$ {result.currentBill.toFixed(2)}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm opacity-80 mb-1">Consumo</p>
-                      <p className="text-3xl font-bold">{result.consumption.toFixed(0)} kWh</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Card className="p-4 text-center bg-card/50 backdrop-blur border-2 border-accent/20 hover:border-accent/50 transition-all hover:shadow-glow-accent">
+                  <Battery className="h-10 w-10 text-accent mx-auto mb-2" />
+                  <p className="text-xs text-muted-foreground mb-1">Sistema</p>
+                  <p className="text-2xl font-bold">{result.systemKwp.toFixed(2)} kWp</p>
+                </Card>
+                
+                <Card className="p-4 text-center bg-card/50 backdrop-blur border-2 border-accent/20 hover:border-accent/50 transition-all hover:shadow-glow-accent">
+                  <Grid3x3 className="h-10 w-10 text-accent mx-auto mb-2" />
+                  <p className="text-xs text-muted-foreground mb-1">Módulos</p>
+                  <p className="text-2xl font-bold">{result.modulesQty}x</p>
+                  <p className="text-xs text-muted-foreground">{MODULO_W}W</p>
+                </Card>
+                
+                <Card className="p-4 text-center bg-card/50 backdrop-blur border-2 border-accent/20 hover:border-accent/50 transition-all hover:shadow-glow-accent">
+                  <Cpu className="h-10 w-10 text-accent mx-auto mb-2" />
+                  <p className="text-xs text-muted-foreground mb-1">Inversor</p>
+                  <p className="text-2xl font-bold">{result.inverterKw} kW</p>
+                </Card>
+                
+                <Card className="p-4 text-center bg-card/50 backdrop-blur border-2 border-accent/20 hover:border-accent/50 transition-all hover:shadow-glow-accent">
+                  <Zap className="h-10 w-10 text-accent mx-auto mb-2" />
+                  <p className="text-xs text-muted-foreground mb-1">Geração Mensal</p>
+                  <p className="text-2xl font-bold">{result.generation.toFixed(0)} kWh</p>
+                </Card>
+              </div>
             </motion.div>
 
             {/* Financing Options */}
@@ -254,18 +264,21 @@ const Calculator = () => {
                       key={option.months}
                       variants={itemVariants}
                       whileHover={{ scale: 1.05, y: -5 }}
+                      onMouseEnter={() => setViewingPlan(option)}
+                      onMouseLeave={() => setViewingPlan(null)}
                       className={`
                         ${isMostChosen ? 'md:scale-105' : ''}
                       `}
                     >
                       <Card className={`
                         relative overflow-hidden border-2 transition-all duration-300
-                        hover:shadow-3d
+                        hover:shadow-3d cursor-pointer
                         ${isMostChosen 
                           ? 'border-accent shadow-glow-accent bg-gradient-to-br from-card to-accent/5' 
                           : 'border-border hover:border-accent/50'
                         }
                         ${selectedPlan?.months === option.months ? 'ring-4 ring-accent' : ''}
+                        ${viewingPlan?.months === option.months && !selectedPlan ? 'ring-2 ring-accent/50' : ''}
                       `}>
                         {isMostChosen && (
                           <div className="absolute top-0 inset-x-0 bg-gradient-to-r from-accent to-yellow-400 text-black text-center py-2 text-xs font-bold">
@@ -326,9 +339,11 @@ const Calculator = () => {
             {/* Lead Capture Form */}
             {selectedPlan && (
               <motion.div
+                id="lead-capture-form"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
+                className="border-4 border-accent/30 rounded-lg animate-border-glow"
               >
                 <LeadCaptureForm
                   calculationData={{

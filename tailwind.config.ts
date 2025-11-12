@@ -50,7 +50,7 @@ export default {
       },
       backgroundImage: {
         'hero-gradient': 'var(--hero-gradient)',
-        'gradient-mesh': 'radial-gradient(at 40% 20%, hsla(228, 89%, 16%, 0.1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(46, 100%, 50%, 0.1) 0px, transparent 50%)',
+        'gradient-mesh': 'radial-gradient(at 20% 30%, hsla(228, 89%, 16%, 0.15) 0px, transparent 50%), radial-gradient(at 80% 70%, hsla(46, 100%, 50%, 0.1) 0px, transparent 50%)',
       },
       boxShadow: {
         'card-hover': 'var(--card-hover)',
