@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, TrendingDown, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingDown, TrendingUp, X, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 
@@ -63,17 +63,17 @@ const BeforeAfterComparison = ({
               R$ {animatedCurrent.toFixed(2)}
             </p>
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <span>❌</span>
+              <X className="h-4 w-4 text-red-500" />
               <span>Sem retorno</span>
             </div>
           </div>
         </div>
 
-        {/* COM SOLAR */}
+        {/* COM MOREIRA SOLAR */}
         <div className="bg-gradient-to-br from-green-100 to-yellow-50 dark:from-green-950/30 dark:to-yellow-900/20 rounded-lg p-6 border-2 border-green-200 dark:border-green-800">
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp className="h-5 w-5 text-green-600" />
-            <span className="font-bold text-green-600 text-sm">COM SOLAR</span>
+            <span className="font-bold text-green-600 text-sm">COM MOREIRA SOLAR</span>
           </div>
           <div className="text-center space-y-2">
             <p className="text-xs text-muted-foreground">Nova parcela</p>
@@ -81,7 +81,7 @@ const BeforeAfterComparison = ({
               R$ {animatedNew.toFixed(2)}
             </p>
             <div className="flex items-center justify-center gap-2 text-xs text-accent">
-              <span>✅</span>
+              <Check className="h-4 w-4 text-green-600" />
               <span>Patrimônio próprio</span>
             </div>
           </div>

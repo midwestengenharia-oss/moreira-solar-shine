@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-white.png";
 
 const Header = () => {
   const scrollToSection = (id: string) => {
